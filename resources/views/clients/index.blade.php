@@ -10,7 +10,7 @@
                 <input id="client-name-search-input" class="form-control mr-sm-2" type="search" name="client_name"
                        placeholder="Ügyfél neve" aria-label="Ügyfél neve">
                 <input id="idcard-search-input" class="form-control mr-sm-2" type="search" name="idcard"
-                       placeholder="Okmányazonosító" aria-label="Okmányazonosító">clea
+                       placeholder="Okmányazonosító" aria-label="Okmányazonosító">
                 <button class="btn btn-outline-success my-2 my-sm-0" id="client-search-submit">KERESÉS</button>
             </form>
         </div>

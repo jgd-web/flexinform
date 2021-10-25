@@ -12,7 +12,7 @@
 
 ### ADATBÁZIS
 - php artisan migrate - parancs futtatása az adatbázis migrációk lefuttatásához
-- php artisan db:seed - az adatbázis feltöltése a teszt adatokkal (amennyiben ez a lépés kimarad, az appléikáció első futáskor elvégzi autómatikusan!)
+- php artisan db:seed - az adatbázis feltöltése a teszt adatokkal (amennyiben ez a lépés kimarad, az applikáció első futáskor elvégzi autómatikusan!)
 
 ### Futtatás
 
