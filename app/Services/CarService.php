@@ -31,19 +31,14 @@ class CarService
     // A klienshez tartozó atók lekérdezése
     public function getClientCars(int $clientID): array
     {
-        $ownBrandLookUp = [
-            0 => 'Nem',
-            1 => 'Igen'
-        ];
-
-        $clientCars = DB::table('services')
+        return DB::table('services')
             ->select([
                 'services.car_id',
                 'services.client_id',
                 'cars.type',
                 'cars.registered',
-                'cars.ownbrand',
-                'cars.accident'
+                'cars.accident',
+                DB::raw("(CASE WHEN cars.ownbrand = 0 THEN 'Nem' ELSE 'Igen' END) AS ownbrand")
             ])
             ->selectRaw('MAX(services.lognumber) AS lognumber')
             ->join('cars', function ($join) {
@@ -54,12 +49,6 @@ class CarService
             ->groupBy(['services.car_id', 'services.client_id'])
             ->get()
             ->toArray();
-
-        foreach ($clientCars as $clientCar) {
-            $clientCar->ownbrand = $ownBrandLookUp[$clientCar->ownbrand];
-        }
-
-        return $clientCars;
     }
 
     // Az autóhoz tartozó szervízek lekérdezése.
