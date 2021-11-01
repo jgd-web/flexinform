@@ -59,10 +59,6 @@ class CarServiceController extends Controller
 
         // Bejövő paraméterek kinyerése
         $input = $request->all();
-
-        // Egyedi validáció:
-        $this->customValidation($input);
-
         $clientData = $this->carService->getClientData($request->validated());
 
         if ($clientData['count'] > 1) {
@@ -79,20 +75,6 @@ class CarServiceController extends Controller
             'error' => 'true',
             'message' => 'Only ajax request accpetable!'
         ]);
-    }
-
-    // Egyedi validációs szabály
-    private function customValidation(array $input): void
-    {
-        if ($input['client_name'] !== null && $input['idcard'] !== null) {
-            response()->json(
-                [
-                    'message' => 'The given data was invalid.',
-                    'errors' => [
-                        'client_name_and_idcard' => "Mindkét mező kitöltése nem engedélyezett!"
-                    ]
-                ], 422);
-        }
     }
 
     // Egyedi hibaüzenet.
