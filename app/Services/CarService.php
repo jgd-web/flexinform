@@ -2,12 +2,26 @@
 
 namespace App\Services;
 
+use App\Models\Car;
 use App\Models\Client;
+use App\Models\Service;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
 class CarService
 {
+    public function checkDatabase(): void
+    {
+        $clients = Client::exists();
+        $cars = Car::exists();
+        $services = Service::exists();
+
+        if (!$clients || !$cars || !$services) {
+            Artisan::call('db:seed');
+        }
+    }
+
     // Az összes kliens lekérdezése lapozóval.
     public function getClients(): LengthAwarePaginator
     {

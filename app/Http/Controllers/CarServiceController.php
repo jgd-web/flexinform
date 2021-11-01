@@ -4,25 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientSearchRequest;
 use App\Services\CarService;
-use App\Services\CheckDatabaseService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CarServiceController extends Controller
 {
-    private CheckDatabaseService $checkDatabaseService;
     private CarService $carService;
 
-    public function __construct(CheckDatabaseService $checkDatabaseService, CarService $carService)
+    public function __construct(CarService $carService)
     {
-        $this->checkDatabaseService = $checkDatabaseService;
         $this->carService = $carService;
     }
 
     // Grid betöltése
     public function index()
     {
-        $this->checkDatabaseService->check();
+        $this->carService->checkDatabase();
         $clients = $this->carService->getClients();
 
         return view('clients/index')->with(compact('clients'));
