@@ -17,4 +17,6 @@ class Service extends Model
         'eventtime',
         'document_id'
     ];
+
+    protected $primaryKey = ['client_id', 'car_id', 'lognumber'];
 }
